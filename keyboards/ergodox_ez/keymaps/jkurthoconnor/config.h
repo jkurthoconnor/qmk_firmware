@@ -4,3 +4,5 @@
 #define QMK_KEYS_PER_SCAN 4
 #endif
 
+#define NO_ACTION_ONESHOT
+
