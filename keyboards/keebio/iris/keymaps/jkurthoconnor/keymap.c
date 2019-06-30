@@ -14,6 +14,7 @@ enum custom_keycodes {
   ADJUST,
 };
 
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_QWERTY] = LAYOUT(
@@ -24,7 +25,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      KC_LALT, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                               KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     LOWER,  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    LGUI_T(KC_BSPC), RGUI_T(KC_TAB), KC_N, KC_M,  KC_COMM, KC_DOT,  KC_RALT, RAISE,
+     KC_LGUI, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,  LT(_LOWER, KC_BSPC), LT(_RAISE, KC_TAB), KC_N, KC_M, KC_COMM, KC_DOT, KC_RALT, KC_RGUI,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                              LCTL_T(KC_LBRC), KC_LSPO, KC_SPC,                   KC_ENT,  KC_RSPC, RCTL_T(KC_RBRC)
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
