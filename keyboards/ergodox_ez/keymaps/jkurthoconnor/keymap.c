@@ -6,7 +6,6 @@
 #define BASE 0 // default layer
 #define SYMB 1 // symbols
 #define MDIA 2 // media keys
-#define RST 3 // reset key
 
 enum custom_keycodes {
   PLACEHOLDER = SAFE_RANGE, // can always be here
@@ -19,22 +18,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Basic layer
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
- * | ESC    |   1  |   2  |   3  |   4  |   5  |  `   |           |   =  |   6  |   7  |   8  |   9  |   0  |   -    |
+ * | ESC    |   1  |   2  |   3  |   4  |   5  | NOOP |           | NOOP |   6  |   7  |   8  |   9  |   0  |   -    |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * | TG1    |   Q  |   W  |   E  |   R  |   T  |  [   |           |  ]   |   Y  |   U  |   I  |   O  |   P  |  DEL   |
+ * | TAB    |   Q  |   W  |   E  |   R  |   T  | NOOP |           | NOOP |   Y  |   U  |   I  |   O  |   P  |  BSPC  |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * | TG2    |   A  |   S  |   D  |   F  |   G  |------|           |------|   H  |   J  |   K  |   L  |   ;  |   '    |
- * |--------+------+------+------+------+------|  /   |           |  \   |------+------+------+------+------+--------|
- * | MO3    |   Z  |   X  |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  |   .  | PSCR | Applic |
+ * | LALT   |   A  |   S  |   D  |   F  |   G  |------|           |----- |   H |   J  |   K  |   L  |   ;  |   '    |
+ * |--------+------+------+------+------+------| NOOP |           | NOOP |-----+------+------+------+------+------+-|
+ * | LGUI    |   Z  |   X  |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  |   .  | RALT | RGUI  |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   | MO1  |  MO2 | LGui | LCtl[| LSPO |                                       | RSPC | RCtl]| LGui | MO2  | MO1    |
+ * | NOOP  |  NOOP | NOOP | LCtl[| LSPO |                                       | RSPC | RCtl]| NOOP | NOOP | NOOP  |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
- *                                        | LAlt | F1   |       | F10  | RAlt |
+ *                                        | F1   | NOOP |       | NOOP | DEL  |
  *                                 ,------|------|------|       |------+--------+------.
- *                                 |      |      | F2   |       | F11  |        |      |
- *                                 | Space|Backsp|------|       |------|  Tab   |Enter |
- *                                 |      |ace   | F7   |       | F12  |        |      |
+ *                                 | Space|      | NOOP |       | NOOP |        | Enter|
+ *                                 |   /  | NOOP |------|       |------|  NOOP  |   /  |
+ *                                 | MEDIA|      | NOOP |       | NOOP |        | SYMB |
  *                                 `--------------------'       `----------------------'
  */
 // If it accepts an argument (i.e, is a function), it doesn't need KC_.
@@ -62,13 +61,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 1: Symbol Layer
  *
  * ,---------------------------------------------------.           ,--------------------------------------------------.
- * |         |  F1  |  F2  |  F3  |  F4  |  F5  |      |           |      |  F6  |  F7  |  F8  |  F9  |  F10 |        |
+ * |         |  F1  |  F2  |  F3  |  F4  |  F5  |      |           |      |  F6  |  F7  |  F8  |  F9  |  F10 | F11    |
  * |---------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
- * |         |   ?  |      |   =  |   |  |   ~  |      |           |      |      |   7  |   8  |   9  |      |        |
+ * |         |   ?  |      |   =  |   |  |   ~  |      |           |      |      |      |      |      |      |        |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |         |   +  |      |   \  |   /  |   `  |------|           |------|      |   4  |   5  |   6  |      |        |
+ * |         |   +  |      |   \  |   /  |   `  |------|           |------|      |      |      |      |      | F12    |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |         |      |  <   |   >  |   {  |   }  |      |           |      |   0  |   1  |   2  |   3  |   .  |        |
+ * |         |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
  * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *   |       |      |      |      |      |                                       |      |      |      |      |      |
  *   `-----------------------------------'                                       `----------------------------------'
@@ -86,7 +85,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_TRNS,    KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_NO,
        KC_TRNS,    KC_QUES,  KC_TRNS,  KC_EQUAL, KC_PIPE,  KC_TILDE, KC_NO,
        KC_TRNS,    KC_PLUS,  KC_TRNS,  KC_BSLASH,KC_SLASH, KC_GRAVE,
-       KC_TRNS,    KC_TRNS,  KC_TRNS,  KC_RABK,  KC_TRNS,  KC_TRNS,  KC_NO,
+       KC_TRNS,    KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_NO,
        KC_NO,      KC_NO,    KC_NO,    KC_TRNS,  KC_TRNS,
                                        KC_TRNS,  KC_TRNS,
                                                  KC_TRNS,
@@ -105,18 +104,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 2: Media and mouse keys
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
- * |        |      |      |      | MUTE | DOWN |  UP  |           |      | HOME | PDWN | PUP  | END  |      |        |
+ * |        |      |      |      |      |      |      |           |      | HOME | PDWN | PUP  | END  |      |        |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * |        |      |      |      |RGBTOG|RGBVAD|RGBVAI|           |      | MsWLt| MsWD | MsWUp| MsWRt|      |        |
+ * |        |      |      |      |      |      |      |           |      | MsWLt| MsWD | MsWUp| MsWRt|      |        |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        |      |      |      |RGBMOD|RGBSLD|------|           |------| Lft  | Dwn  | Up   | Rt   |      |        |
+ * |        |      |      |      |      |      |------|           |------| Lft  | Dwn  | Up   | Rt   |      |        |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        |      |      |      |      |RGBHUD|RGBHUI|           |      | MsLt | MsDwn| MsUp | MsRt |      |        |
+ * |        |      |      |      |      |      |      |           |      | MsLt | MsDwn| MsUp | MsRt |      |        |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   |      |      |      |      | MSACC|                                       |      |      |      |      |      |
+ *   |      |      |      |      |      |                                       |      |      |      |      |      |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
- *                                        | LClk | RClk |       | LClk | RClk |
+ *                                        | RESET|      |       | LClk | RClk |
  *                                 ,------|------|------|       |------+------+------.
  *                                 |      |      |      |       |      |      |      |
  *                                 |      |      |------|       |------|      |      |
@@ -142,28 +141,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_TRNS,KC_MS_LEFT,KC_MS_DOWN,KC_MS_UP,KC_MS_RIGHT,KC_TRNS,KC_PSCREEN,
       KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,
       KC_MS_BTN1,KC_MS_BTN2,
-      KC_TRNS,
-      KC_TRNS,KC_TRNS,KC_TRNS
-),
-
-[RST] = LAYOUT_ergodox(  // layer 2 : reset
-      //left hand
-      KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,
-      KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,
-      KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,
-      KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,
-      KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,
-                                      KC_TRNS,KC_TRNS,
-                                              KC_TRNS,
-                              KC_TRNS,KC_TRNS,KC_TRNS,
-
-     //right hand 
-      KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,RESET,
-      KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,
-      KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,
-      KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,
-      KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,
-      KC_TRNS,KC_TRNS,
       KC_TRNS,
       KC_TRNS,KC_TRNS,KC_TRNS
 ),
